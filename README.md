@@ -1,4 +1,4 @@
-本仓库主要是涉及JavaScript基础知识的讲解，md文件格式，建议下载一个markdown编辑器用于演示内容，推荐使用：Typora。
+本仓库主要是涉及JavaScript基础知识的回顾。
 
 
 ##一、JavaScript 概述
