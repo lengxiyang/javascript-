@@ -4,8 +4,6 @@ JavaScript是一种轻量级的脚本语言。所谓“脚本语言”，指的�
 
 JavaScript是一种嵌入式（embedded）语言。它本身提供的核心语法，规模相当小，只能用来做一些数学和逻辑运算。JavaScript本身不提供任何与I/O（输入/输出）相关的API，都要靠宿主环境（host）提供，所以JavaScript只合适嵌入更大型的应用程序环境，去调用宿主环境提供的底层API。
 
-目前，已经嵌入JavaScript的宿主环境有多种，最常见的环境就是浏览器，另外还有服务器环境，也就是Node项目。
-
 从语法角度看，JavaScript语言是一种“对象模型 ”语言。各种宿主环境通过这个模型，描述自己的功能和操作接口，从而通过JavaScript控制这些功能。但是，JavaScript并不是纯粹的“面向对象语言”，还支持函数式编程。这导致几乎任何一个问题，JavaScript都有多种解决方法。
 
 JavaScript的核心语法部分相当精简，只包括两个部分：基本的语法构造（比如操作符、控制结构、语句）和标准库（就是一系列具有各种功能的对象比如Array、Date、Math等）。除此之外，各种宿主环境提供额外的API（即只能在该环境使用的接口），以便JavaScript调用。以浏览器为例，它提供的额外API可以分成三大类。
@@ -100,12 +98,12 @@ JavaScript的性能优势体现在以下方面:
 	    <meta charset="UTF-8">
 	    <title>Document</title>
         <script>
-        // insert javascript codes in here....
+        	// insert javascript codes in here....
         </script>
     </head>
     <body>
         <script>
-        // insert javascript codes in here....
+        	// insert javascript codes in here....
         </script>
     </body>
     </html>
@@ -116,25 +114,25 @@ JavaScript的性能优势体现在以下方面:
  
  创建 .js 文件，在 head 标签内或在 body 结束标签前引入。引入 .js 文件使用 script 标签，并通过 src 属性指定文件路径，代码如下：
  
-    // my.js
+    // my_fj.js
 
     // insert javascript codes in here...
     <!-- index.html -->
     <!DOCTYPE html>
     <html lang="en">
     <head>
-	    <meta charset="UTF-8">
-	    <title>Document</title>
+	<meta charset="UTF-8">
+	<title>Document</title>
         <!-- 引入方式1 -->
-        <script type="text/javascript" src="my.js"></script>
+        <script type="text/javascript" src="my_fj.js"></script>
     </head>
     <body>
         <!-- 引入方式2 -->
-	    <script type="text/javascript" src="my.js"></script>
+	<script type="text/javascript" src="my_fj.js"></script>
     </body>
     </html>
     
  tips：这里建议大家使用外链方式，将js代码独立放置到一个文件中，便于我们后期维护整合优化。
 
 
-#### 注：本课主要内容参考了阮一峰老师的著作《JavaScript 标准参考教程（alpha）》
+#### 注：本课主要内容参考了阮一峰老师的《JavaScript 标准参考教程（alpha）》
