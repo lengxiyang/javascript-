@@ -1,0 +1,441 @@
+字符截取显示
+var text = $(“.content”).text();
+var textNum = text.length;
+var textInt = text.slice(0,140);
+$(“.content”).each(function () {
+if (textNum >= 160) {
+$(this).html(textInt + “…” + “详细”)
+$(“.dis_btn”).click(function () {
+$(“.content”).text(text);
+});
+return false;
+} else {
+$(“.content”).each(function () {
+$(this).text(text);
+})
+}
+})
+
+div做链接
+$(“.pane-list li”).click(function(){
+    window.location=$(this).find(“a”).attr(“href”);return false;
+});
+
+简单的炸屏效果
+$(document).ready(function(){
+setTimeout(“showBanner();”,5000);
+});
+function showBanner(){
+$(“.banner p:eq(0)”).slideUp(1000,function(){$(“.banner p:eq(1)”).slideDown(1000);});
+}
+
+单条滚动的新闻写法1
+function scroll_news(){
+$(function(){
+      $(‘#dvmq li’).eq(0).fadeOut(‘slow’,function(){ 
+    // alert($(this).clone().html());
+
+//克隆:不用克隆的话，remove()就没了。
+            $(this).clone().appendTo($(this).parent()).fadeIn(‘slow’);
+            $(this).remove();
+        });
+     });
+}
+setInterval(‘scroll_news()’,1000);
+
+单条滚动的新闻写法2
+function AutoScroll(obj){
+$(obj).find(“ul:first”).animate({
+marginTop:”-25px”
+},1000,function(){
+$(this).css({marginTop:”0px”}).find(“li:first”).appendTo(this);
+});
+}
+$(document).ready(function(){
+setInterval(‘AutoScroll(“#scrollDiv”)’,3000)
+});
+
+验证QQ号码
+var qq=/^[1-9]\d{4,8}$/;
+var user_qq =$(“#user_qq”).val()
+if(!qq.test(user_qq)){
+alert(“请输入正确的QQ”);
+return false;
+}
+
+验证邮编
+var linkzipcode =$(“.form input[name='linkzipcode']“).val();
+var zipcode=/\d{6}/
+if(!zipcode.test(linkzipcode)){
+alert(“请输入正确的邮编”);
+return false;
+}
+
+验证手机号码
+    var reg0=/^13\d{9}$/;
+    var reg1=/^153\d{8}$/;
+    var reg2=/^159\d{8}$/;
+    var reg3=/^158\d{8}$/;
+    var reg4=/^150\d{8}$/;
+var phone=reg0||reg1||reg2||reg3||reg4
+var linkphone =$(“.form input[name='linkphone']“).val();
+if(!phone.test(linkphone)){
+alert(“请输入正确的手机号码”);
+return false;
+}
+
+验证中文
+var isChn = /^[\u4e00-\u9fa5]+$/i
+var linkname =$(“.form input[name='linkname']“).val();
+if(!isChn.test(linkname)){
+alert(“请输入真实的联系人名称”);
+return false;
+}
+
+JQuery实现div等高效果
+function SetSameHeight(obj1,obj2)
+{
+     var h1 = $(obj1).outerHeight(); //获取对象1的高度
+     var h2 = $(obj2).outerHeight();  //获取对象2高度
+     var mh = Math.max( h1, h2); //比较一下
+     $(obj1).height(mh);
+     $(obj2).height(mh);
+}
+在页面用调用：
+jQuery(document).ready(function($) { 
+    SetSameHeight(“.left”,”.line”);
+    SetSameHeight(“.right_main”,”.line”);//如果有３个div 就加这一行代码，再适应一次．
+}
+
+
+使用JQuery操作iframe
+iframe id=”leftiframe”
+iframe id=”mainiframe
+leftiframe中jQuery改变mainiframe的src代码： 
+$(“#mainframe”,parent.document.body).attr(“src”,”http://www.radys.cn”)
+
+JQuery获取浏览器窗口的高度和宽度
+$(document).ready(function(){
+alert($(window).height()); //浏览器时下窗口可视区域高度
+alert($(document).height()); //浏览器时下窗口文档的高度
+alert($(document.body).height());//浏览器时下窗口文档body的高度
+alert($(document.body).outerHeight(true));//浏览器时下窗口文档body的总高度包括border padding margin
+alert($(window).width()); //浏览器时下窗口可视区域宽度
+alert($(document).width());//浏览器时下窗口文档对于象宽度
+alert($(document.body).width());//浏览器时下窗口文档body的高度
+alert($(document.body).outerWidth(true));//浏览器时下窗口文档body的总宽度包括border padding margin1
+})
+
+jQuery 离开页面时提示
+//绑定beforeunload事件
+$(window).bind(‘beforeunload’,function(){
+    return ‘您输入的内容尚未保存，确定离开此页面吗？’;
+});
+//解除绑定
+$(window).unbind(‘beforeunload’);
+
+图片不完全按比例自动缩小
+jQuery(document).ready(function(){
+$(window).load(function(){
+$(‘#content img’).each(function(){
+var x = 200; //填入目标图片宽度
+var y = 140; //填入目标图片高度
+var w=$(this).width(), h=$(this).height();//获取图片宽度、高度
+if (w > x) { //图片宽度大于目标宽度时
+var w_original=w, h_original=h;
+h = h * (x / w); //根据目标宽度按比例算出高度
+w = x; //宽度等于预定宽度
+if (h < y) { //如果按比例缩小后的高度小于预定高度时
+w = w_original * (y / h_original); //按目标高度重新计算宽度
+h = y; //高度等于预定高度
+}
+}
+$(this).attr({width:w,height:h});
+});
+});
+});
+
+jQuery得到用户IP
+$.getJSON(“http://jsonip.appspot.com?callback=?”, function (data) {
+    alert(“Your ip: ” + data.ip);
+});
+
+jQuery查看图片的宽度和高度
+var theImage = new Image();
+theImage.src = $(‘#imageid’).attr(“src”);
+alert(“Width: ” + theImage.width);
+alert(“Height: ” + theImage.height);
+
+jQuery控制IFRAME 父页面控制子窗口
+DOM方法：
+父窗口操作 IFRAME：window.frames["iframeSon"].document
+IFRAME操作父窗口: window.parent.document
+jQuery方法:
+在父窗口中操作 选中IFRAME中的所有输入框： $(window.frames["iframeSon"].document).find(”:text”);
+在IFRAME中操作 选中父窗口中的所有输入框：$(window.parent.document).find(”:text”);
+iframe框架的HTML：iframe src=”test.html” id=”iframeSon” width=”700″ height=”300″ frameborder=”0″ scrolling=”auto”
+细心的朋友一下就能理解，原理其实很简单，就是用到了$(DOM对象)转换成 jquery对象。
+用jQuery在IFRAME里取得父窗口的某个元素的值
+只好用DOM方法与jquery方法结合的方式实现了
+1.在父窗口中操作 选中IFRAME中的所有单选钮
+$(window.frames["iframe1"].document).find(”input[@type='radio']“).attr(”checked”,”true”);
+2.在IFRAME中操作 选中父窗口中的所有单选钮
+$(window.parent.document).find(”input[@type='radio']“).attr(”checked”,”true”);
+iframe框架的：
+iframe src=”test.html” id=”iframe1″ width=”700″ height=”300″ frameborder=”0″ scrolling=”auto”
+IE7中测试通过
+jquery判断是否滚动到最后一个
+var $next =  $current.next().length ? $current.next() : $(“#slideshow div:first”);
+
+jquery仿淘宝搜索滚动固定
+$(function(){
+var s= $(‘#nav’).position().top;
+var t=80;
+$(window).scroll(function (){ 
+if($(window).scrollTop()>215)
+{
+$(“#nav”).animate({top:$(window).scrollTop()-t+”px”},{queue:false,duration:400});
+}else{
+$(“#nav”).animate({top:$(window).scrollTop()+s+”px”},{queue:false,duration:400});
+}
+});
+//nav必须用position:absolute;nav的父容器必须position:relative;
+})
+
+jquery修复IE position:fixed
+function fixedPosition (element,top,right){
+$(element).css(“display”,”block”)
+if(!$.browser.msie){
+$(element).css(“position”,”fixed”)
+    }else{
+$(element).css(“position”,”absolute”)
+$(“body”).css({“height”:”100%”,”overflow”:”auto”,”margin”:”0″});
+$(“html”).css({“overflow-x”:”auto”,”overflow-y”:”hidden”});
+}
+$(element).css({“top”:top,”right”:right})
+};
+$(function(){
+fixedPosition(test,150 ,40); 
+})
+方法2
+<!--&ndash;[if IE 6]-->
+#fixed {
+position: fixed;
+_position: absolute;
+bottom: 0;
+right:0.75em;
+top:20%;
+}
+<!--[endif]&ndash;-->
+
+(function(){
+var overlay = document.getElementById(‘fixed’),t;
+window.onscroll = function() {
+t && clearTimeout(t);
+t = setTimeout(function() {
+var t=document.documentElement.scrollTop;
+t=t+156;
+overlay.style.top=t+”px”;
+},0);
+};
+})();
+
+
+jquery each 遍历常用方法
+下面提一下jQuery的each方法的几种常用的用法
+Js代码
+var arr = [ "one", "two", "three", "four"];     
+$.each(arr, function(){     
+    alert(this);     
+});     
+//上面这个each输出的结果分别为：one,two,three,four    
+    
+var arr1 = [[1, 4, 3], [4, 6, 6], [7, 20, 9]]     
+$.each(arr1, function(i, item){     
+   alert(item[0]);     
+});     
+//其实arr1为一个二维数组，item相当于取每一个一维数组，   
+//item[0]相对于取每一个一维数组里的第一个值   
+//所以上面这个each输出分别为：1   4   7    
+    
+var obj = { one:1, two:2, three:3, four:4};     
+$.each(obj, function(key, val) {     
+    alert(obj[key]);           
+});   
+//这个each就有更厉害了，能循环每一个属性     
+//输出结果为：1   2  3  4 
+
+还可以省略function的参数，这个时候this可以得到遍历的当前元素的值
+var arr = [9, 8, 7, 6, 5, 4, 3, 2, 1];
+       $.each(arr, function() { alert(this); });
+
+js 判断浏览器是否启用cookie
+$(document).ready(function () {
+    document.cookie = “cookieid=1; expires=60″;
+    var result = document.cookie.indexOf(“cookieid=”) != -1;
+    if (!result) {
+        alert(“浏览器未启用cookie”);
+    }
+});
+
+jQuery检测键盘按键
+$(document).ready(function () {
+    $(this).keypress(function (e) {
+        switch (e.which) {
+            case 13:
+                alert(“您按下了回车键”);
+                break;
+            //more detect
+        }
+    });
+});
+
+jQuery 滚动到顶部/底部
+//滚动到顶部
+$(“html, body”).animate({ scrollTop: “0px” }, 1000);
+//滚动到底部
+//$(“#container”):要滚动的元素
+$(“html, body”).animate({
+    scrollTop: $(“#container”).height()
+}, 1000);
+
+jQuery 判断元素是否存在
+怎么使用 jQuery 判断元素是否存在，相信不少 jQuery 学习者都会问这个问题，方法很简单，如下：
+if ($(” #elementid”).length) {
+    //元素存在
+}
+
+jQuery 禁用鼠标右键
+$(document).ready(function() {
+    $(document).bind(“contextmenu”, function() {
+        return false;
+    });
+});
+
+向由setTimeout()调用的方法中传参
+$(document).ready(function() {
+    timeout = setTimeout(function() {
+        showMess(“succeed”)
+    }, 2000);
+});
+function showMess(m) {
+    alert(m);
+}
+
+jQuery 倒计时
+$(document).ready(function () {
+    var count = 10;
+    countdown = setInterval(function () {
+        $(“p.countdown”).html(count + ” 秒后将跳转！”);
+        if (count == 0) {
+            clearInterval(countdown)
+            window.location = ‘http://google.com’;
+        }
+        count–;
+    }, 1000);
+});
+
+jQuery 判断浏览器类型及版本号
+jQuery 判断浏览器类型及版本号非常简单，可以直接使用 $.browser 方法进行判断。但我自己试验时发现在判断 Chrome 浏览器时，返回的是 Safari，在网上找了下，于是有了下边的代码：
+var browserName = navigator.userAgent.toLowerCase();
+mybrowser = {
+    version: (browserName.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [0, '0'])[1],
+    safari: /webkit/i.test(browserName) && !this.chrome,
+    opera: /opera/i.test(browserName),
+    firefox: /firefox/i.test(browserName),
+    msie: /msie/i.test(browserName) && !/opera/.test(browserName),
+    mozilla: /mozilla/i.test(browserName) && !/(compatible|webkit)/.test(browserName) && !this.chrome,
+    chrome: /chrome/i.test(browserName) && /webkit/i.test(browserName) && /mozilla/i.test(browserName)
+}
+$(document).ready(function () {
+    if (mybrowser.msie) {
+        alert(“浏览器为：Internet Explorer 版本号为：” + $.browser.version);
+    }
+    else if (mybrowser.mozilla) {
+        alert(“浏览器为：Firefox 版本号为：” + $.browser.version);
+    }
+    else if (mybrowser.opera) {
+        alert(“浏览器为：Opera 版本号为：” + $.browser.version);
+    }
+    else if (mybrowser.safari) {
+        alert(“浏览器为：Safari 版本号为：” + $.browser.version);
+    }
+    else if (mybrowser.chrome) {
+        alert(“浏览器为：Chrome 版本号为：” + mybrowser.version);
+    }
+    else {
+        alert(“神马”);
+    }
+});
+
+jQuery 元素居中显示
+//写成了插件形式
+(function ($) {
+    jQuery.fn.center = function () {
+        this.css(‘position’, ‘absolute’);
+        this.css(‘top’, ($(window).height() – this.height()) /2 +$(window).scrollTop() + ‘px’);
+        this.css(‘left’, ($(window).width() – this.width()) / 2 + $(window).scrollLeft() + ‘px’);
+        return this;
+    }
+})(jQuery);
+$(document).ready(function () {
+    //调用
+    $(“#somediv”).center();
+});
+
+jQuery 判断图像是否被完全加载进来
+$(“#demoImg”).attr(“src”, “demo.jpg”).load(function() {  
+    alert(“图片加载完成”);  
+}); 
+
+jQuery仿微博字数统计功能
+jq(‘#content’).bind(‘focus keyup input paste’,function(){  //采用几个事件来触发（已增加鼠标粘贴事件）   
+jq(‘#num’).text(140 – jq(this).attr(“value”).length)  //获取评论框字符长度并添加到ID=”num”元素上  
+});
+
+jQuery 实现左右两列一样高
+$(function () {
+    var left = $(‘#left’).height();
+    var right = $(‘#right’).height();
+    left > right ? $(‘#right’).height(left) : $(‘#left’).height(right);
+});
+
+jQuery 操作 select 小结
+//移除value为”2″的option
+$(“#id option[value='2']“).remove();
+//获取select option选中值
+$(“#id”).val();
+//设置value为”2″的option为当前选中
+$(“#id”).val(“2″);
+//获取select option选中text
+$(“#id :selected”).text()
+
+Javascript 实现字符串补”0″
+join() 方法用于把数组中的所有元素放入一个字符串，元素是通过指定的分隔符进行分隔的，缺省时为逗号(“,”)。
+function padZero(str, length) {
+    var strLen = str.length;
+    return length > strLen ? new Array(length – strLen + 1).join(“0″) + str : str;
+}
+
+jQuery 双击时不选中文本
+//清理选中
+var clearSelection = function () {
+    if (document.selection && document.selection.empty) {
+        document.selection.empty();
+    }
+    else if (window.getSelection) {
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+    }
+}
+$(“#content”).dblclick(function(e) {
+    clearSelection();
+});
+
+jQuery 选中文本框值和取消选中
+当光标移动到文本框上边时，将文本框的值选中，离开时取消选中，这样方便了用户修改文本框的值，提高了用户体验。或许你也有兴趣看看 jQuery设置和移除文本框默认值，当然在 HTML5 中我们可直接使用 “placeholder” 属性。
+$(“input[type='text']“).hover(function () {
+    $(this).select();
+}, function () {
+    $(this).val($(this).val());
+});
